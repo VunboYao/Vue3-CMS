@@ -1,6 +1,7 @@
 <template>
   <router-link to="/main">Main</router-link>
   <router-link to="/login">Login</router-link>
+  <h3>{{ $store.state.name }}</h3>
   <router-view />
 </template>
 
