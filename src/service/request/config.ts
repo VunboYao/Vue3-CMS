@@ -1,4 +1,4 @@
-let BASE_URL = ''
+let BASE_URL: string
 const TIME_OUT = 1000
 
 if (process.env.NODE_ENV === 'development') {

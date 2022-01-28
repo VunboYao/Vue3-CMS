@@ -6,5 +6,5 @@ import store from './store'
 createApp(App).use(store).use(router).mount('#app')
 
 // 环境变量
-console.error('VUE_APP_BASE_URL :>> ', process.env.VUE_APP_BASE_URL)
-console.error('VUE_APP_BASE_URL :>> ', process.env.VUE_APP_BASE_NAME)
+/*console.error('VUE_APP_BASE_URL :>> ', process.env.VUE_APP_BASE_URL)
+console.error('VUE_APP_BASE_URL :>> ', process.env.VUE_APP_BASE_NAME)*/
