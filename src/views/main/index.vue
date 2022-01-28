@@ -13,6 +13,16 @@ let test = () => {
   api.request({
     url: '/home/multidata',
     method: 'get'
+    /*   interceptor: {
+      requestInterceptor: (res) => {
+        console.log('single request=>>>1')
+        return res
+      },
+      responseInterceptor: (res) => {
+        console.log('single response=>>>1')
+        return res
+      }
+    } */
   })
 }
 </script>
