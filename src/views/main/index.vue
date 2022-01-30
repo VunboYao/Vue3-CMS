@@ -31,7 +31,7 @@ let test = () => {
     } */
     })
     .then((res) => {
-      console.log(res.returnCode, res.success)
+      // console.log(res.returnCode, res.success)
     })
 
   // todo: 并发请求问题处理。计数处理。继发问题，延迟关闭

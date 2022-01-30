@@ -10,6 +10,9 @@ module.exports = {
         views: '@/views'
       }
     } */
+    devServer: {
+      open: true
+    },
     plugins: [
       AutoImport({
         resolvers: [ElementPlusResolver()]

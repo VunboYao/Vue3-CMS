@@ -28,28 +28,26 @@ export default class {
     // 全局拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        console.log('全局拦截器:', config)
+        // console.log('全局拦截器:', config)
         return config
       },
-      (configErr) => {
-        console.log('全局拦截器:', configErr)
+      () => {
+        // console.log('全局拦截器:', configErr)
       }
     )
     this.instance.interceptors.response.use(
       (response) => {
-        console.log('全局拦截器:', response)
-        setTimeout(() => {
-          loading?.close()
-        }, 1000)
+        // console.log('全局拦截器:', response)
+        loading?.close()
         // todo：状态码200，判断returnMessage
         return response.data
       },
-      (responseErr) => {
+      () => {
         setTimeout(() => {
           loading?.close()
         }, 1000)
         // todo: 判断不同的httpErrorCode
-        console.log('全局拦截器:', responseErr)
+        // console.log('全局拦截器:', responseErr)
       }
     )
   }
