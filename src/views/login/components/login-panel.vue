@@ -1,8 +1,8 @@
 <template>
   <div class="login-panel">
     <h1>User Config System</h1>
-    <el-tabs type="border-card" stretch>
-      <el-tab-pane>
+    <el-tabs type="border-card" stretch v-model="currentTab">
+      <el-tab-pane name="pwdPane">
         <template #label>
           <span class="title-wrap">
             <el-icon :size="14"><user /></el-icon>&nbsp;密码登陆
@@ -10,7 +10,7 @@
         </template>
         <PwdModule ref="pwdRef" />
       </el-tab-pane>
-      <el-tab-pane label="Config">
+      <el-tab-pane name="phonePane">
         <template #label>
           <span class="title-wrap">
             <el-icon :size="14"><phone /></el-icon>&nbsp;短信登陆
@@ -44,14 +44,19 @@ export default defineComponent({
   },
   setup() {
     const isKeepPwd = ref(true) // ref初始值声明
-
+    const currentTab = ref('pwdPane') // 当前选项卡
     const pwdRef = ref<InstanceType<typeof PwdModule>>() // 获取组件实例的类型
 
     const loginActions = () => {
-      pwdRef.value?.pwdActions(isKeepPwd.value) // 传入是否需要记住密码标识
+      if (currentTab.value === 'pwdPane') {
+        pwdRef.value?.pwdActions(isKeepPwd.value) // 传入是否需要记住密码标识
+      } else {
+        console.log('Opos, this is developing')
+      }
     }
     return {
       pwdRef,
+      currentTab,
       loginActions,
       isKeepPwd
     }
