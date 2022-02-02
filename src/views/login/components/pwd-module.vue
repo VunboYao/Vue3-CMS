@@ -5,7 +5,7 @@
         <el-input v-model="account.name" clearable />
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="account.password" clearable />
+        <el-input type="password" show-password v-model="account.password" />
       </el-form-item>
     </el-form>
   </div>
@@ -15,21 +15,29 @@
 import { defineComponent, reactive, ref } from 'vue'
 import rules from './config/rules'
 import type { ElForm } from 'element-plus'
+import Cache from '@/utils/cache'
 
 export default defineComponent({
   setup() {
     const account = reactive({
-      name: '',
-      password: ''
+      name: Cache.getCache('name') ?? '',
+      password: Cache.getCache('password') ?? ''
     })
 
     const formRef = ref<InstanceType<typeof ElForm>>() // todo: ref的取值在ref.value
-    const pwdActions = () => {
+    const pwdActions = (isPwd: boolean) => {
       formRef.value?.validate((isValid) => {
         if (isValid) {
-          console.log('success')
-        } else {
-          console.log('data is not exact')
+          // 1.判断是否需要记住密码
+          if (isPwd) {
+            // 3.开始进行登陆验证
+            // 2.本地缓存
+            Cache.setCache('name', account.name)
+            Cache.setCache('password', account.password)
+          } else {
+            Cache.deleteCache('name')
+            Cache.deleteCache('password')
+          }
         }
       })
     }

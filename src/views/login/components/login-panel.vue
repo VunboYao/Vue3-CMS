@@ -48,7 +48,7 @@ export default defineComponent({
     const pwdRef = ref<InstanceType<typeof PwdModule>>() // 获取组件实例的类型
 
     const loginActions = () => {
-      pwdRef.value?.pwdActions()
+      pwdRef.value?.pwdActions(isKeepPwd.value) // 传入是否需要记住密码标识
     }
     return {
       pwdRef,
