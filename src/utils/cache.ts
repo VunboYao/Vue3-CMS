@@ -3,7 +3,8 @@ class LocalCache {
     window.localStorage.setItem(key, JSON.stringify(value))
   }
 
-  getCache(key: string): unknown {
+  getCache(key: string): any {
+    // todo: 返回值不能是unknown,否则无法赋值
     const value = window.localStorage.getItem(key)
     if (value) {
       return JSON.parse(value)
