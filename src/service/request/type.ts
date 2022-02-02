@@ -12,4 +12,5 @@ export interface VunRequestConfig<T = AxiosResponse>
   extends AxiosRequestConfig {
   interceptor?: VunRequestInterceptors<T>
   showLoading?: boolean
+  headers?: any
 }

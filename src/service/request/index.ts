@@ -3,6 +3,7 @@ import { ElLoading } from 'element-plus'
 import 'element-plus/theme-chalk/el-loading.css'
 import type { AxiosInstance } from 'axios'
 import { VunRequestInterceptors, VunRequestConfig } from './type'
+import Cache from '@/utils/cache'
 
 let loading: any
 
@@ -27,8 +28,12 @@ export default class {
 
     // 全局拦截器
     this.instance.interceptors.request.use(
-      (config) => {
+      (config: VunRequestConfig) => {
         // console.log('全局拦截器:', config)
+        const token = Cache.getCache('token')
+        if (token) {
+          config.headers.Authorization = token
+        }
         return config
       },
       () => {
