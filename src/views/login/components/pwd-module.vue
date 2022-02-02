@@ -16,6 +16,7 @@ import { defineComponent, reactive, ref } from 'vue'
 import rules from './config/rules'
 import type { ElForm } from 'element-plus'
 import Cache from '@/utils/cache'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   setup() {
@@ -23,6 +24,7 @@ export default defineComponent({
       name: Cache.getCache('name') ?? '',
       password: Cache.getCache('password') ?? ''
     })
+    const store = useStore()
 
     const formRef = ref<InstanceType<typeof ElForm>>() // todo: ref的取值在ref.value
     const pwdActions = (isPwd: boolean) => {
@@ -31,6 +33,8 @@ export default defineComponent({
           // 1.判断是否需要记住密码
           if (isPwd) {
             // 3.开始进行登陆验证
+            // 如果直接传入account，会是响应式
+            store.dispatch('loginStore/vxLogin', { ...account })
             // 2.本地缓存
             Cache.setCache('name', account.name)
             Cache.setCache('password', account.password)

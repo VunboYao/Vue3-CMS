@@ -1,10 +1,9 @@
 import { createStore } from 'vuex'
+import loginStore from '@/store/login/login'
 
 const store = createStore({
-  state() {
-    return {
-      name: 'vunbo'
-    }
+  modules: {
+    loginStore
   }
 })
 export default store
