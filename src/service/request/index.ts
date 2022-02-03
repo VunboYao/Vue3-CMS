@@ -6,6 +6,13 @@ import { VunRequestInterceptors, VunRequestConfig } from './type'
 import Cache from '@/utils/cache'
 
 let loading: any
+let timer: number | null
+
+function closeLoadingTimer() {
+  timer = setTimeout(() => {
+    loading?.close()
+  }, 100)
+}
 
 export default class {
   instance: AxiosInstance
@@ -42,17 +49,13 @@ export default class {
     )
     this.instance.interceptors.response.use(
       (response) => {
-        // console.log('全局拦截器:', response)
-        loading?.close()
+        closeLoadingTimer()
         // todo：状态码200，判断returnMessage
         return response.data
       },
       () => {
-        setTimeout(() => {
-          loading?.close()
-        }, 1000)
+        closeLoadingTimer()
         // todo: 判断不同的httpErrorCode
-        // console.log('全局拦截器:', responseErr)
       }
     )
   }
@@ -63,11 +66,17 @@ export default class {
       config.showLoading = config.showLoading ?? true
       // loading的触发点
       if (config.showLoading) {
-        loading = ElLoading.service({
-          lock: true,
-          text: 'Loading',
-          background: 'rgba(0, 0, 0, 0.7)'
-        })
+        if (timer) {
+          // 存在loading定时器则关闭该定时器
+          clearTimeout(timer)
+          timer = null
+        } else {
+          loading = ElLoading.service({
+            lock: true,
+            text: 'Loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+          })
+        }
       }
       // 单次请求的独立加工？？？
       if (config.interceptor?.requestInterceptor) {
