@@ -46,9 +46,12 @@ export default defineComponent({
   cursor: pointer;
 }
 .el-dropdown-link {
-  width: 100px;
+  min-width: 80px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+}
+.el-avatar {
+  margin-right: 10px;
 }
 </style>

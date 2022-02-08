@@ -9,8 +9,10 @@
           <NavHeader @toggleExpand="changeExpand" />
         </el-header>
         <el-main class="page-content">
-          <RouterView />
-          <!--子孙页面展示区域-->
+          <div class="page-info">
+            <RouterView />
+            <!--子孙页面展示区域-->
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -91,5 +93,12 @@ export default defineComponent({
   color: #333;
   text-align: center;
   background-color: #f0f2f5;
+  div {
+    overflow: hidden;
+    border-radius: 4px;
+  }
+}
+.page-info {
+  background: #fff;
 }
 </style>

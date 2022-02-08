@@ -7,8 +7,8 @@ const rules = {
       trigger: 'blur'
     },
     {
-      pattern: /^[\da-z]{4,8}$/g,
-      message: '用户名只能4-8位数字或者小写字母',
+      pattern: /^[\da-z]{3,8}$/g,
+      message: '用户名只能3-8位数字或者小写字母',
       trigger: 'blur'
     }
   ],
