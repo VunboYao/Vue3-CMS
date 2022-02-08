@@ -8,6 +8,7 @@ import {
 } from '@/service/login/login'
 import Cache from '@/utils/cache'
 import router from '@/router'
+import { mapMenusToRoutes } from '@/utils/mapMenus'
 
 const loginStore: Module<iLoginState, any> = {
   namespaced: true, // 模块下需要声明namespaced
@@ -27,6 +28,7 @@ const loginStore: Module<iLoginState, any> = {
     },
     SAVE_USER_MENU(state, userMenu: any) {
       state.userMenu = userMenu
+      mapMenusToRoutes(userMenu)
     },
     LOGIN_LOCAL_DATA(state) {
       const userInfo = Cache.getCache('userInfo')
@@ -40,6 +42,7 @@ const loginStore: Module<iLoginState, any> = {
       const userMenu = Cache.getCache('userMenu')
       if (userMenu) {
         state.userMenu = userMenu
+        mapMenusToRoutes(userMenu)
       }
     }
   },

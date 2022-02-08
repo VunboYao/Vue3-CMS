@@ -20,7 +20,7 @@ import NavMenu from '@/components/nav-menu'
 import NavHeader from '@/components/nav-header'
 
 export default defineComponent({
-  name: '',
+  name: 'Main',
   components: {
     NavMenu,
     NavHeader
