@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-icon size="28px">
-      <Expand :class="{ reverse: isExpand }" @click="toggleNav" />
+      <Expand :class="{ reverse: !isExpand }" @click="toggleNav" />
     </el-icon>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default defineComponent({
 })
 
 function expand(emit: any) {
-  const isExpand = ref(true)
+  const isExpand = ref(false)
   const toggleNav = () => {
     isExpand.value = !isExpand.value
     emit('toggleExpand', isExpand.value)

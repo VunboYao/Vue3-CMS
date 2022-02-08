@@ -26,7 +26,7 @@ export default defineComponent({
     NavHeader
   },
   setup() {
-    const mainExpand = ref(true)
+    const mainExpand = ref(false)
     const changeExpand = (expand: boolean) => {
       mainExpand.value = expand
     }
