@@ -28,7 +28,10 @@ const loginStore: Module<iLoginState, any> = {
     },
     SAVE_USER_MENU(state, userMenu: any) {
       state.userMenu = userMenu
-      mapMenusToRoutes(userMenu)
+      const route = mapMenusToRoutes(userMenu)
+      route.forEach((route) => {
+        router.addRoute('Main', route)
+      })
     },
     LOGIN_LOCAL_DATA(state) {
       const userInfo = Cache.getCache('userInfo')
@@ -42,7 +45,10 @@ const loginStore: Module<iLoginState, any> = {
       const userMenu = Cache.getCache('userMenu')
       if (userMenu) {
         state.userMenu = userMenu
-        mapMenusToRoutes(userMenu)
+        const route = mapMenusToRoutes(userMenu)
+        route.forEach((route) => {
+          router.addRoute('Main', route)
+        })
       }
     }
   },

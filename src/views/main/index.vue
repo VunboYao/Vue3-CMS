@@ -8,7 +8,10 @@
         <el-header class="page-header">
           <NavHeader @toggleExpand="changeExpand" />
         </el-header>
-        <el-main class="page-content">Main</el-main>
+        <el-main class="page-content">
+          <RouterView />
+          <!--子孙页面展示区域-->
+        </el-main>
       </el-container>
     </el-container>
   </div>

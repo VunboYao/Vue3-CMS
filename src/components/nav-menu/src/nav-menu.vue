@@ -24,7 +24,10 @@
             <!--遍历二级路由-->
             <template v-for="subItem in item.children" :key="subItem.id">
               <template v-if="subItem.type === 2">
-                <el-menu-item :index="subItem.id + ''">
+                <el-menu-item
+                  :index="subItem.id + ''"
+                  @click="handleMenu(subItem)"
+                >
                   {{ subItem.name }}
                 </el-menu-item>
               </template>
@@ -40,6 +43,7 @@
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store'
 import { useIcon } from '@/utils/icon'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'NavMenu',
@@ -51,10 +55,15 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
+    const router = useRouter()
     const userMenus = computed(() => store.state.loginStore.userMenu)
     const computedIcon = useIcon // icon处理
+    const handleMenu = (item: any) => {
+      router.push(item.url)
+    }
     return {
       userMenus,
+      handleMenu,
       computedIcon
     }
   }

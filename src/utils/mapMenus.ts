@@ -13,7 +13,17 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
   routeFiles.keys().forEach((key) => {
     allRoutes.push(routeFiles(key).default)
   })
-  console.log(allRoutes)
   // 2.根据菜单获取需要添加的routes
+  const _recurseGetRoute = (menus: any[]) => {
+    for (const menu of menus) {
+      if (menu.type === 2) {
+        const route = allRoutes.find((item) => item.path === menu.url)
+        if (route) routes.push(route)
+      } else {
+        _recurseGetRoute(menu.children)
+      }
+    }
+  }
+  _recurseGetRoute(userMenus)
   return routes
 }
