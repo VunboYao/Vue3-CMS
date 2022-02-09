@@ -1,5 +1,6 @@
 import { createStore, Store, useStore as vxUseStore } from 'vuex'
 import loginStore from '@/store/login/login'
+import systemStore from '@/store/main/system/system'
 import { iRootState, iStoreType } from '@/store/type'
 
 const store = createStore<iRootState>({
@@ -10,7 +11,8 @@ const store = createStore<iRootState>({
     }
   },
   modules: {
-    loginStore
+    loginStore,
+    systemStore
   }
 })
 
