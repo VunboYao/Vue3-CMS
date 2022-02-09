@@ -36,5 +36,6 @@ router.beforeEach((to) => {
       return '/login'
     }
   }
+  // console.log(to) // 匹配到了notFound
 })
 export default router
