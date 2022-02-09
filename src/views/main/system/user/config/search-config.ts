@@ -1,18 +1,26 @@
 import { iForm } from '@/base-ui/form'
-
+export const formData = {
+  name: '',
+  pwd: '',
+  createTime: '',
+  hobbit: ''
+}
 export const formConfig: iForm = {
   formItems: [
     {
+      filed: 'name',
       type: 'input',
       label: 'username',
       placeholder: 'please input your name'
     },
     {
+      filed: 'pwd',
       type: 'password',
       label: 'pwd',
       placeholder: 'please input your pwd'
     },
     {
+      filed: 'createTime',
       type: 'datepicker',
       label: 'datepicker',
       otherOptions: {
@@ -22,6 +30,7 @@ export const formConfig: iForm = {
       }
     },
     {
+      filed: 'hobbit',
       type: 'select',
       label: 'select',
       placeholder: 'please some ...',

@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <v-from v-bind="formConfig" />
+    <v-from v-bind="formConfig" v-model="formData" />
     <div class="content"></div>
   </div>
 </template>
@@ -8,7 +8,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import vFrom from '@/base-ui/form'
-import { formConfig } from '@/views/main/system/user/config/search-config'
+import {
+  formConfig,
+  formData
+} from '@/views/main/system/user/config/search-config'
 export default defineComponent({
   name: 'user',
   components: {
@@ -16,6 +19,7 @@ export default defineComponent({
   },
   setup() {
     return {
+      formData,
       formConfig
     }
   }
