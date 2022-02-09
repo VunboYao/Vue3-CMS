@@ -1,5 +1,6 @@
 <template>
   <div class="v-form">
+    <slot name="header"></slot>
     <el-form :label-width="labelWith">
       <el-row>
         <template v-for="item in formItems" :key="item.label">
@@ -44,6 +45,7 @@
         </template>
       </el-row>
     </el-form>
+    <slot name="footer"></slot>
   </div>
 </template>
 
