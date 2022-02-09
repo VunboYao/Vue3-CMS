@@ -7,7 +7,7 @@
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item>
+          <el-dropdown-item @click="QuitLogin($store)">
             <el-icon><bicycle /></el-icon>
             <span>退出登陆</span>
           </el-dropdown-item>
@@ -23,7 +23,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
+import { Store } from 'vuex'
+import { iStoreType } from '@/store/type'
 
 export default defineComponent({
   name: 'UserInfo',
@@ -35,10 +37,14 @@ export default defineComponent({
     const name = store.state.loginStore.userInfo.name
     return {
       circleUrl,
-      name
+      name,
+      QuitLogin
     }
   }
 })
+function QuitLogin(store: Store<iStoreType>): void {
+  store.commit('loginStore/QUIT_LOGIN')
+}
 </script>
 
 <style scoped>

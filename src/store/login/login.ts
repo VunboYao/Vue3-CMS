@@ -20,6 +20,13 @@ const loginStore: Module<iLoginState, any> = {
     }
   },
   mutations: {
+    QUIT_LOGIN(state) {
+      state.token = ''
+      state.userInfo = ''
+      state.userMenu = ''
+      Cache.clearCache()
+      router.push('/login')
+    },
     SAVE_TOKEN(state, token: string) {
       state.token = token
     },

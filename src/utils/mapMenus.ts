@@ -1,5 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 
+let firstMenu: any = null
+
 export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
   const routes: RouteRecordRaw[] = []
   // 1.先加载默认所有的routes
@@ -19,6 +21,9 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
       if (menu.type === 2) {
         const route = allRoutes.find((item) => item.path === menu.url)
         if (route) routes.push(route)
+        if (!firstMenu) {
+          firstMenu = menu
+        }
       } else {
         _recurseGetRoute(menu.children)
       }
@@ -27,3 +32,16 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
   _recurseGetRoute(userMenus)
   return routes
 }
+
+export function getMenuOfPath(userMenus: any[], path: string): any {
+  for (const menu of userMenus) {
+    if (menu.type === 1) {
+      const findMenu = getMenuOfPath(menu.children ?? [], path)
+      if (findMenu) return findMenu
+    } else if (menu.type === 2 && menu.url === path) {
+      return menu
+    }
+  }
+}
+
+export { firstMenu }

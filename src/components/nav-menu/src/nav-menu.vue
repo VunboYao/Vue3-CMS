@@ -5,6 +5,7 @@
       <span class="title" v-show="!expand">Vue3+TS</span>
     </div>
     <el-menu
+      :default-active="defaultActive"
       :collapse="expand"
       active-text-color="#ffd04b"
       background-color="#286DAF"
@@ -40,10 +41,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useStore } from '@/store'
 import { useIcon } from '@/utils/icon'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { getMenuOfPath } from '@/utils/mapMenus'
 
 export default defineComponent({
   name: 'NavMenu',
@@ -56,15 +58,19 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const router = useRouter()
+    const route = useRoute()
     const userMenus = computed(() => store.state.loginStore.userMenu)
     const computedIcon = useIcon // icon处理
     const handleMenu = (item: any) => {
       router.push(item.url)
     }
+    const menu = getMenuOfPath(userMenus.value, route.path)
+    const defaultActive = ref(menu.id + '')
     return {
       userMenus,
       handleMenu,
-      computedIcon
+      computedIcon,
+      defaultActive
     }
   }
 })
