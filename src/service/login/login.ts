@@ -1,10 +1,10 @@
 import requestInstance from '@/service'
 import {
-  iLoginRes,
   iLoginReq,
   iLoginResData,
   iLoginResUserData
 } from '@/service/login/type'
+import { iRes as iLoginRes } from '@/service/type'
 
 enum loginApi {
   loginAccount = '/login',

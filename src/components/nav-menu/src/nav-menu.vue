@@ -9,7 +9,6 @@
       active-text-color="#ffd04b"
       background-color="#286DAF"
       text-color="#fff"
-      default-active="2"
     >
       <template v-for="item in userMenus" :key="item.id">
         <!--一级菜单-->

@@ -32,7 +32,6 @@ const loginStore: Module<iLoginState, any> = {
       route.forEach((route) => {
         router.addRoute('Main', route)
       })
-      debugger
     },
     LOGIN_LOCAL_DATA(state) {
       const userInfo = Cache.getCache('userInfo')
