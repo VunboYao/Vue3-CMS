@@ -4,7 +4,7 @@
       <Expand :class="{ reverse: !isExpand }" @click="toggleNav" />
     </el-icon>
     <div class="x">
-      <div class="x-left">面包屑</div>
+      <div class="x-left"><breadcrumb :bread-crumb="breadCrumbs" /></div>
       <div class="x-right">
         <user-info />
       </div>
@@ -13,22 +13,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useIcon } from '@/utils/icon'
+import { computed, defineComponent, ref } from 'vue'
 import userInfo from '@/components/nav-header/src/user-info.vue'
+import breadcrumb from '@/base-ui/breadcrumb'
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
+import { getBreadCrumbOfPath } from '@/utils/mapMenus'
+
 export default defineComponent({
   name: 'NavHeader',
   components: {
-    userInfo
+    userInfo,
+    breadcrumb
   },
   setup(props, { emit }) {
-    const computedIcon = useIcon
+    const breadCrumbs = handleBreadCrumb()
     return {
-      ...expand(emit),
-      computedIcon
+      breadCrumbs,
+      ...expand(emit)
     }
   }
 })
+function handleBreadCrumb() {
+  const route = useRoute()
+  const store = useStore()
+  const userMenu = store.state.loginStore.userMenu
+  return computed(() => {
+    return getBreadCrumbOfPath(userMenu, route.path)
+  })
+}
 
 function expand(emit: any) {
   const isExpand = ref(false)

@@ -18,7 +18,7 @@
             <!--一级菜单图标-->
             <template #title v-if="item.icon">
               <el-icon>
-                <component :is="$icons[computedIcon(item.icon)]"></component>
+                <component :is="$icons[useIcon(item.icon)]"></component>
               </el-icon>
               <span>{{ item.name }}</span>
             </template>
@@ -60,16 +60,16 @@ export default defineComponent({
     const router = useRouter()
     const route = useRoute()
     const userMenus = computed(() => store.state.loginStore.userMenu)
-    const computedIcon = useIcon // icon处理
     const handleMenu = (item: any) => {
       router.push(item.url)
     }
-    const menu = getMenuOfPath(userMenus.value, route.path)
-    const defaultActive = ref(menu.id + '')
+    const defaultActive = computed(() => {
+      return getMenuOfPath(userMenus.value, route.path).id + ''
+    })
     return {
       userMenus,
       handleMenu,
-      computedIcon,
+      useIcon,
       defaultActive
     }
   }
