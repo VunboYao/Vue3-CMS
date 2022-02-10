@@ -42,7 +42,9 @@ export default defineComponent({
 
     // 2.重置
     const handleRefresh = () => {
-      formData.value = formOriginData
+      for (const key in formOriginData) {
+        formData.value[`${key}`] = formOriginData[key]
+      }
     }
     return {
       handleRefresh,

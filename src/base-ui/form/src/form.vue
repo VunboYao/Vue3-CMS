@@ -86,6 +86,7 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup(props, { emit }) {
     const formData = reactive({ ...props.modelValue })
+    // 如果监听formData，会导致循环更新
     watch(
       formData,
       (newValue) => {
