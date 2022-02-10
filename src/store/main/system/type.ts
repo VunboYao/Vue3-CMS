@@ -1,7 +1,7 @@
 import { iSystemReqData } from '@/service/main/system/type'
 
 export interface iSystemState {
-  userList: any[]
+  usersList: any[]
   userCount: number
   roleList: any[]
   roleCount: number

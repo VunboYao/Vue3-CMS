@@ -7,15 +7,27 @@ const systemStore: Module<iSystemState, iRootState> = {
   namespaced: true,
   state() {
     return {
-      userList: [],
+      usersList: [],
       userCount: 0,
       roleList: [],
       roleCount: 0
     }
   },
+  getters: {
+    pageListData(state) {
+      return (pageName: string) => {
+        switch (pageName) {
+          case 'users':
+            return state.usersList
+          case 'role':
+            return state.roleList
+        }
+      }
+    }
+  },
   mutations: {
     CHANGE_USERS_LIST(state, userList: any[]) {
-      state.userList = userList
+      state.usersList = userList
     },
     CHANGE_USERS_COUNT(state, userCount) {
       state.userCount = userCount

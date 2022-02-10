@@ -1,5 +1,5 @@
 <template>
-  <v-table :list-data="userList" v-bind="tableConfig">
+  <v-table :list-data="dataList" v-bind="tableConfig">
     <template #headerHandler>
       <el-button type="primary">新建用户</el-button>
     </template>
@@ -46,10 +46,12 @@ export default defineComponent({
         size: 10
       }
     })
-    const userList = computed(() => store.state.systemStore.userList)
+    const dataList = computed(() => {
+      return store.getters[`systemStore/pageListData`](props.pageName)
+    })
     return {
       useIcon,
-      userList
+      dataList
     }
   }
 })
