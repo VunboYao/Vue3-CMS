@@ -1,28 +1,22 @@
 import { iForm } from '@/base-ui/form'
-export const formData = {
-  name: '',
-  pwd: '',
-  createTime: '',
-  hobbit: ''
-}
 export const formConfig: iForm = {
   formItems: [
     {
       filed: 'name',
       type: 'input',
-      label: 'username',
+      label: '用户名',
       placeholder: 'please input your name'
     },
     {
-      filed: 'pwd',
-      type: 'password',
-      label: 'pwd',
-      placeholder: 'please input your pwd'
+      filed: 'id',
+      type: 'input',
+      label: 'id',
+      placeholder: 'please input your id'
     },
     {
       filed: 'createTime',
       type: 'datepicker',
-      label: 'datepicker',
+      label: '创建时间',
       otherOptions: {
         startPlaceholder: '开始时间',
         endPlaceholder: '结束时间',
@@ -32,7 +26,7 @@ export const formConfig: iForm = {
     {
       filed: 'hobbit',
       type: 'select',
-      label: 'select',
+      label: '爱好',
       placeholder: 'please some ...',
       options: [
         {

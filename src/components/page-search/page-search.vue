@@ -1,27 +1,27 @@
 <template>
-  <div class="page-search">
-    <v-from v-model="formData" v-bind="formConfig">
-      <template #header>
-        <h2>高级检索</h2>
-      </template>
-      <template #footer>
-        <div class="handle-btn">
-          <el-button>重置</el-button>
-          <el-button type="primary">查询</el-button>
-        </div>
-      </template>
-    </v-from>
-  </div>
+  <v-from v-model="formData" v-bind="formConfig">
+    <template #header>
+      <h2>高级检索</h2>
+    </template>
+    <template #footer>
+      <div class="handle-btn">
+        <el-button @click="handleRefresh"
+          ><el-icon><Refresh /></el-icon>重置</el-button
+        >
+        <el-button type="primary">查询</el-button>
+      </div>
+    </template>
+  </v-from>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import vFrom from '@/base-ui/form'
-import { formData } from '@/views/main/system/user/config/search-config'
-
+import { Refresh } from '@element-plus/icons-vue'
 export default defineComponent({
   name: 'PageSearch',
   components: {
+    Refresh,
     vFrom
   },
   props: {
@@ -30,19 +30,29 @@ export default defineComponent({
       required: true
     }
   },
-  setup() {
+  setup(props) {
+    // 双向绑定的属性应该是由配置文件的field来决定
+    // 1.formData应该是动态的由formConfig中获取
+    const formItems = props.formConfig.formItems ?? []
+    const formOriginData: any = {}
+    for (const obj of formItems) {
+      formOriginData[obj.filed] = ''
+    }
+    const formData = ref(formOriginData)
+
+    // 2.重置
+    const handleRefresh = () => {
+      formData.value = formOriginData
+    }
     return {
-      formData // model数据未处理
+      handleRefresh,
+      formData
     }
   }
 })
 </script>
 
 <style scoped>
-.page-search {
-  overflow: hidden;
-  background-color: #fff;
-}
 .handle-btn {
   padding: 20px;
   text-align: right;

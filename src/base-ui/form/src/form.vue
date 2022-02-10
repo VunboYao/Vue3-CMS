@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, watch } from 'vue'
+import { defineComponent, PropType, reactive, watch, computed } from 'vue'
 import { iFormItem } from '@/base-ui/form'
 
 export default defineComponent({
@@ -66,7 +66,7 @@ export default defineComponent({
     },
     labelWith: {
       type: String,
-      default: '120px'
+      default: '100px'
     },
     itemStyle: {
       type: Object,
@@ -85,9 +85,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const formData = reactive({
-      ...props.modelValue
-    })
+    const formData = reactive({ ...props.modelValue })
     watch(
       formData,
       (newValue) => {
@@ -104,4 +102,10 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-form {
+  padding: 20px;
+  overflow: hidden;
+  background-color: #fff;
+}
+</style>
