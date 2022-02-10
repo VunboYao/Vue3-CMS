@@ -6,6 +6,12 @@
         <template #enable="{ row }">{{
           row.enable ? '启用' : '禁用'
         }}</template>
+        <template #createAt="{ row }">
+          {{ $filters.formatTime(row.createAt) }}
+        </template>
+        <template #updateAt="{ row }">
+          {{ $filters.formatTime(row.updateAt) }}
+        </template>
       </v-table>
     </div>
   </div>
@@ -30,7 +36,7 @@ export default defineComponent({
       url: '/users/list',
       query: {
         offset: 0,
-        size: 1
+        size: 10
       }
     })
     const userList = computed(() => store.state.systemStore.userList)

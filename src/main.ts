@@ -3,13 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { setupStore } from './store'
-import icons from '@/utils/icon' // 全局图标注册
-
+import { GlobalProperty } from '@/global'
 import 'normalize.css'
 import './assets/css/index.less'
 
 const app = createApp(App)
-app.use(icons)
+GlobalProperty(app)
 app.use(store)
 setupStore() // 刷新后vuex数据恢复
 
