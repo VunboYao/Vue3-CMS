@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-table :data="listData" border>
+    <el-table v-bind="$attrs" :data="listData" border>
+      <el-table-column v-if="showSelection" align="center" type="selection" />
       <el-table-column
         v-if="showIndex"
         type="index"
@@ -34,6 +35,10 @@ export default defineComponent({
       required: true
     },
     showIndex: {
+      type: Boolean,
+      default: false
+    },
+    showSelection: {
       type: Boolean,
       default: false
     }
