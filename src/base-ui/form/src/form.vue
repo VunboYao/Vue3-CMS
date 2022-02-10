@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, watch, computed } from 'vue'
+import { defineComponent, PropType, reactive, watch } from 'vue'
 import { iFormItem } from '@/base-ui/form'
 
 export default defineComponent({
