@@ -1,33 +1,31 @@
 <template>
   <div class="user">
     <page-search :form-config="formConfig" />
-    <div class="content">
-      <v-table
-        :list-data="userList"
-        :props-list="propsList"
-        :show-selection="true"
-        :show-index="true"
-        @select="onSelect"
-      >
-        <template #enable="{ row }">{{
-          row.enable ? '启用' : '禁用'
-        }}</template>
-        <template #createAt="{ row }">
-          {{ $filters.formatTime(row.createAt) }}
-        </template>
-        <template #updateAt="{ row }">
-          {{ $filters.formatTime(row.updateAt) }}
-        </template>
-        <template #operation>
-          <el-button type="text" :icon="$icons[useIcon('Edit')]"
-            >编辑</el-button
-          >
-          <el-button type="text" :icon="$icons[useIcon('Delete')]"
-            >删除</el-button
-          >
-        </template>
-      </v-table>
-    </div>
+    <v-table
+      title="用户列表"
+      :list-data="userList"
+      :props-list="propsList"
+      :show-selection="true"
+      :show-index="true"
+      @select="onSelect"
+    >
+      <template #headerHandler>
+        <el-button type="primary">新建用户</el-button>
+      </template>
+      <template #enable="{ row }">{{ row.enable ? '启用' : '禁用' }}</template>
+      <template #createAt="{ row }">
+        {{ $filters.formatTime(row.createAt) }}
+      </template>
+      <template #updateAt="{ row }">
+        {{ $filters.formatTime(row.updateAt) }}
+      </template>
+      <template #operation>
+        <el-button type="text" :icon="$icons[useIcon('Edit')]">编辑</el-button>
+        <el-button type="text" :icon="$icons[useIcon('Delete')]"
+          >删除</el-button
+        >
+      </template>
+    </v-table>
   </div>
 </template>
 
@@ -79,10 +77,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.user {
-  padding: 18px 18px 0 0;
-}
 .content {
+  margin-top: 20px;
   padding: 20px;
 }
 </style>

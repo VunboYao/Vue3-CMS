@@ -102,7 +102,4 @@ export default defineComponent({
     border-radius: 4px;
   }
 }
-.page-info {
-  background: #fff;
-}
 </style>

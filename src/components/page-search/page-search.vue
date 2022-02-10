@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-search">
     <v-from v-model="formData" v-bind="formConfig">
       <template #header>
         <h2>高级检索</h2>
@@ -39,6 +39,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.page-search {
+  overflow: hidden;
+  background-color: #fff;
+}
 .handle-btn {
   padding: 20px;
   text-align: right;
