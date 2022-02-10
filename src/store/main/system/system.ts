@@ -16,12 +16,13 @@ const systemStore: Module<iSystemState, iRootState> = {
   getters: {
     pageListData(state) {
       return (pageName: string) => {
-        switch (pageName) {
+        return (state as any)[`${pageName}List`]
+        /*switch (pageName) {
           case 'users':
             return state.usersList
           case 'role':
             return state.roleList
-        }
+        }*/
       }
     }
   },
