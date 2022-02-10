@@ -11,7 +11,7 @@ export const tableConfig = {
     { prop: 'updateAt', label: '更新时间' },
     { prop: 'operation', label: '操作', minWidth: '150px' }
   ],
-  onSelect: (item: any): void => {
+  onSelect: (item: []): void => {
     console.log(item, '选择了数据')
   }
 }

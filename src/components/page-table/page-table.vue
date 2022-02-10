@@ -31,12 +31,16 @@ export default defineComponent({
     tableConfig: {
       type: Object,
       required: true
+    },
+    pageName: {
+      type: String,
+      required: true
     }
   },
-  setup() {
+  setup(props) {
     const store = useStore()
     store.dispatch('systemStore/getPageListAction', {
-      url: '/users/list',
+      pageName: props.pageName,
       query: {
         offset: 0,
         size: 10
