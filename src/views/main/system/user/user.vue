@@ -2,7 +2,7 @@
   <div class="user">
     <page-search :form-config="formConfig" />
     <div class="content">
-      <v-table :list-data="userList" :props-list="propsList">
+      <v-table :list-data="userList" :props-list="propsList" :show-index="true">
         <template #enable="{ row }">{{
           row.enable ? '启用' : '禁用'
         }}</template>
@@ -25,7 +25,7 @@ import { useStore } from '@/store'
 import vTable from '@/base-ui/table'
 
 export default defineComponent({
-  name: 'user',
+  name: 'User',
   components: {
     pageSearch,
     vTable

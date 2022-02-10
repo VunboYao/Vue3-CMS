@@ -10,7 +10,11 @@
         </el-header>
         <el-main class="page-content">
           <div class="page-info">
-            <RouterView />
+            <RouterView v-slot="{ Component }">
+              <keep-alive>
+                <component :is="Component" />
+              </keep-alive>
+            </RouterView>
             <!--子孙页面展示区域-->
           </div>
         </el-main>

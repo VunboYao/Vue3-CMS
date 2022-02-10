@@ -1,7 +1,7 @@
 <template>
   <div class="login-panel">
     <h1>User Config System</h1>
-    <el-tabs type="border-card" stretch v-model="currentTab">
+    <el-tabs v-model="currentTab" type="border-card" stretch>
       <el-tab-pane name="pwdPane">
         <template #label>
           <span class="title-wrap">

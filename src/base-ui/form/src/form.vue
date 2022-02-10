@@ -14,9 +14,9 @@
                 v-if="item.type === 'input' || item.type === 'password'"
               >
                 <el-input
+                  v-model="formData[`${item.filed}`]"
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
-                  v-model="formData[`${item.filed}`]"
                 />
               </template>
               <template v-else-if="item.type === 'select'">
@@ -55,7 +55,6 @@ import { iFormItem } from '@/base-ui/form'
 
 export default defineComponent({
   name: 'Form',
-  emits: ['update:modelValue'],
   props: {
     modelValue: {
       type: Object,
@@ -84,6 +83,7 @@ export default defineComponent({
       })
     }
   },
+  emits: ['update:modelValue'],
   setup(props, { emit }) {
     const formData = reactive({
       ...props.modelValue

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-from v-bind="formConfig" v-model="formData">
+    <v-from v-model="formData" v-bind="formConfig">
       <template #header>
         <h2>高级检索</h2>
       </template>
@@ -21,14 +21,14 @@ import { formData } from '@/views/main/system/user/config/search-config'
 
 export default defineComponent({
   name: 'PageSearch',
+  components: {
+    vFrom
+  },
   props: {
     formConfig: {
       type: Object,
       required: true
     }
-  },
-  components: {
-    vFrom
   },
   setup() {
     return {

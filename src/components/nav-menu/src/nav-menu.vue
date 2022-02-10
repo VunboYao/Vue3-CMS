@@ -2,7 +2,7 @@
   <div class="nav-menu">
     <div class="logo">
       <img src="~@/assets/img/logo.svg" alt="logo" class="img" />
-      <span class="title" v-show="!expand">Vue3+TS</span>
+      <span v-show="!expand" class="title">Vue3+TS</span>
     </div>
     <el-menu
       :default-active="defaultActive"
@@ -16,7 +16,7 @@
         <template v-if="item.type === 1">
           <el-sub-menu :index="item.id + ''">
             <!--一级菜单图标-->
-            <template #title v-if="item.icon">
+            <template v-if="item.icon" #title>
               <el-icon>
                 <component :is="$icons[useIcon(item.icon)]"></component>
               </el-icon>

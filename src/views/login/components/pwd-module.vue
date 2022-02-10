@@ -5,7 +5,7 @@
         <el-input v-model="account.name" clearable />
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" show-password v-model="account.password" />
+        <el-input v-model="account.password" type="password" show-password />
       </el-form-item>
     </el-form>
   </div>

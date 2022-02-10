@@ -16,7 +16,7 @@ import { defineComponent, PropType } from 'vue'
 import { iBreadcrumb } from '@/base-ui/breadcrumb/src/type'
 
 export default defineComponent({
-  name: 'breadcrumb',
+  name: 'Breadcrumb',
   props: {
     breadCrumb: {
       type: Array as PropType<iBreadcrumb[]>,

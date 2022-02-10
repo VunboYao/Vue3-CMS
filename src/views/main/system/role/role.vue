@@ -1,6 +1,8 @@
 <template>
   <div class="role">
-    <h2>role</h2>
+    <h2>
+      <el-button @click="$router.push({ name: 'user' })">Go</el-button>
+    </h2>
   </div>
 </template>
 
@@ -8,7 +10,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'role',
+  name: 'Role',
   setup() {
     return {}
   }

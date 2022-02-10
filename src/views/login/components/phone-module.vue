@@ -6,7 +6,7 @@
       </el-form-item>
       <el-form-item label="验证码" prop="code">
         <div class="get-code">
-          <el-input type="password" v-model="phone.code" />
+          <el-input v-model="phone.code" type="password" />
           <el-button type="primary" class="btn">获取验证码</el-button>
         </div>
       </el-form-item>
