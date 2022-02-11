@@ -88,6 +88,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
+    // 双向绑定模式
     /*const formData = reactive({ ...props.modelValue })
     // 如果监听formData，会导致循环更新
     watch(
@@ -100,7 +101,7 @@ export default defineComponent({
       }
     )*/
     const changeModelValue = (value: any, field: string) => {
-      // 整体对象更新，当前变更覆盖之前变化
+      // TODO：整体对象更新，当前变更对原对象进行覆盖
       emit('update:modelValue', {
         ...props.modelValue,
         [field]: value

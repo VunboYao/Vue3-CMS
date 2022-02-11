@@ -27,6 +27,7 @@ export default defineComponent({
     pageTable
   },
   setup() {
+    // 1.在user中通过tableRef调用内部的数据请求方法。2.监听v-form暴露的refresh/search事件
     const { pageTableRef, handleRefresh, handleSearch } = usePageSearch()
     return {
       pageTableRef,
