@@ -28,16 +28,13 @@
     <div class="footer">
       <slot name="footer">
         <el-pagination
-          v-model:currentPage="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
-          :small="small"
-          :disabled="disabled"
-          :background="background"
+          v-model:currentPage="currentPage"
+          v-model:page-size="pageSize"
+          :page-sizes="[2, 4, 6]"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
+          :total="listCount"
+          @size-change="onSizeChange"
+          @current-change="onCurrentChange"
         >
         </el-pagination>
       </slot>
@@ -46,11 +43,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'Table',
   props: {
+    page: {
+      type: Object,
+      default: () => ({
+        currentPage: 1,
+        pageSize: 2
+      })
+    },
     title: {
       type: String,
       default: ''
@@ -58,6 +62,10 @@ export default defineComponent({
     listData: {
       type: Array,
       required: true
+    },
+    listCount: {
+      type: Number,
+      default: 0
     },
     propsList: {
       type: Array,
@@ -72,8 +80,28 @@ export default defineComponent({
       default: false
     }
   },
-  setup() {
-    return {}
+  emits: ['update:page'],
+  setup(props, { emit }) {
+    const currentPage = ref(props.page.currentPage)
+    const pageSize = ref(props.page.pageSize)
+    const onSizeChange = (count: number) => {
+      emit('update:page', {
+        currentPage: currentPage.value,
+        pageSize: count
+      })
+    }
+    const onCurrentChange = (count: number) => {
+      emit('update:page', {
+        pageSize: pageSize.value,
+        currentPage: count
+      })
+    }
+    return {
+      pageSize,
+      currentPage,
+      onSizeChange,
+      onCurrentChange
+    }
   }
 })
 </script>

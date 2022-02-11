@@ -8,7 +8,7 @@ const systemStore: Module<iSystemState, iRootState> = {
   state() {
     return {
       usersList: [],
-      userCount: 0,
+      usersCount: 0,
       roleList: [],
       roleCount: 0
     }
@@ -24,14 +24,19 @@ const systemStore: Module<iSystemState, iRootState> = {
             return state.roleList
         }*/
       }
+    },
+    pageCount(state) {
+      return (pageName: string) => {
+        return (state as any)[`${pageName}Count`]
+      }
     }
   },
   mutations: {
     CHANGE_USERS_LIST(state, userList: any[]) {
       state.usersList = userList
     },
-    CHANGE_USERS_COUNT(state, userCount) {
-      state.userCount = userCount
+    CHANGE_USERS_COUNT(state, usersCount) {
+      state.usersCount = usersCount
     },
     CHANGE_ROLE_LIST(state, roleList: any[]) {
       state.roleList = roleList

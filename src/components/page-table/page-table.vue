@@ -1,5 +1,10 @@
 <template>
-  <v-table :list-data="dataList" v-bind="tableConfig">
+  <v-table
+    v-model:page="pageInfo"
+    :list-count="pageCount"
+    :list-data="dataList"
+    v-bind="tableConfig"
+  >
     <template #headerHandler>
       <el-button type="primary">新建用户</el-button>
     </template>
@@ -18,10 +23,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import vTable from '@/base-ui/table'
 import { useIcon } from '@/utils/icon'
 import { useStore } from '@/store'
+import { Store } from 'vuex'
+import { iStoreType } from '@/store/type'
+
 export default defineComponent({
   name: 'PageTable',
   components: {
@@ -39,28 +47,47 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore()
+    // 分页器配置
+    const pageInfo = ref({
+      pageSize: 2,
+      currentPage: 1
+    })
     // 发送网络请求
     const tableSearch = (params: any = {}) => {
       store.dispatch('systemStore/getPageListAction', {
         pageName: props.pageName,
         query: {
-          offset: 0,
-          size: 10,
+          offset: pageInfo.value.pageSize * (pageInfo.value.currentPage - 1),
+          size: pageInfo.value.pageSize,
           ...params
         }
       })
     }
     tableSearch()
-    const dataList = computed(() => {
-      return store.getters[`systemStore/pageListData`](props.pageName)
+    watch(pageInfo, () => {
+      tableSearch()
     })
+
     return {
+      ...getTableData(store, props), // 页面数据，数量获取
+      pageInfo,
       useIcon,
-      dataList,
       tableSearch
     }
   }
 })
+function getTableData(store: Store<iStoreType>, props: any): any {
+  const dataList = computed(() => {
+    return store.getters[`systemStore/pageListData`](props.pageName)
+  })
+  const pageCount = computed(() => {
+    return store.getters[`systemStore/pageCount`](props.pageName)
+  })
+  return {
+    dataList,
+    pageCount
+  }
+}
 </script>
 
 <style scoped></style>
