@@ -14,16 +14,18 @@
                 v-if="item.type === 'input' || item.type === 'password'"
               >
                 <el-input
-                  v-model="formData[`${item.filed}`]"
+                  :model-value="modelValue[`${item.filed}`]"
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
+                  @update:modelValue="changeModelValue($event, item.filed)"
                 />
               </template>
               <template v-else-if="item.type === 'select'">
                 <el-select
-                  v-model="formData[`${item.filed}`]"
+                  :model-value="modelValue[`${item.filed}`]"
                   :placeholder="item.placeholder"
                   style="width: 100%"
+                  @update:modelValue="changeModelValue($event, item.filed)"
                 >
                   <el-option
                     v-for="option in item.options"
@@ -35,9 +37,10 @@
               </template>
               <template v-else-if="item.type === 'datepicker'">
                 <el-date-picker
-                  v-model="formData[`${item.filed}`]"
+                  :model-value="modelValue[`${item.filed}`]"
                   v-bind="item.otherOptions"
                   style="width: 100%"
+                  @update:modelValue="changeModelValue($event, item.filed)"
                 ></el-date-picker>
               </template>
             </el-form-item>
@@ -85,7 +88,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const formData = reactive({ ...props.modelValue })
+    /*const formData = reactive({ ...props.modelValue })
     // 如果监听formData，会导致循环更新
     watch(
       formData,
@@ -95,9 +98,18 @@ export default defineComponent({
       {
         deep: true
       }
-    )
+    )*/
+    const changeModelValue = (value: any, field: string) => {
+      console.log(value)
+      // 整体对象更新，当前变更覆盖之前变化
+      emit('update:modelValue', {
+        ...props.modelValue,
+        [field]: value
+      })
+    }
     return {
-      formData
+      changeModelValue
+      // formData
     }
   }
 })
