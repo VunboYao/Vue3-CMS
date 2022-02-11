@@ -11,6 +11,7 @@ let timer: number | null
 function closeLoadingTimer() {
   timer = setTimeout(() => {
     loading?.close()
+    timer = null
   }, 100)
 }
 

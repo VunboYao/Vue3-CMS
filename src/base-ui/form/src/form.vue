@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, watch } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { iFormItem } from '@/base-ui/form'
 
 export default defineComponent({
@@ -100,7 +100,6 @@ export default defineComponent({
       }
     )*/
     const changeModelValue = (value: any, field: string) => {
-      console.log(value)
       // 整体对象更新，当前变更覆盖之前变化
       emit('update:modelValue', {
         ...props.modelValue,

@@ -5,16 +5,32 @@ export const formConfig: iForm = {
       filed: 'name',
       type: 'input',
       label: '用户名',
-      placeholder: 'please input your name'
+      placeholder: '请输入用户名'
     },
     {
-      filed: 'id',
+      filed: 'realname',
       type: 'input',
-      label: 'id',
-      placeholder: 'please input your id'
+      label: '真实姓名',
+      placeholder: '请输入真实姓名'
     },
     {
-      filed: 'createTime',
+      filed: 'cellphone',
+      type: 'input',
+      label: '电话号码',
+      placeholder: '请输入电话号码'
+    },
+    {
+      filed: 'enable',
+      type: 'select',
+      label: '用户状态',
+      placeholder: '请选择用户状态',
+      options: [
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
+    },
+    {
+      filed: 'createAt',
       type: 'datepicker',
       label: '创建时间',
       otherOptions: {
@@ -22,22 +38,6 @@ export const formConfig: iForm = {
         endPlaceholder: '结束时间',
         type: 'daterange'
       }
-    },
-    {
-      filed: 'hobbit',
-      type: 'select',
-      label: '爱好',
-      placeholder: 'please some ...',
-      options: [
-        {
-          label: '足球',
-          value: 'soccer'
-        },
-        {
-          label: '篮球',
-          value: 'basketball'
-        }
-      ]
     }
   ]
   /*labelWidth: '120px',

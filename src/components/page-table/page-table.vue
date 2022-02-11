@@ -39,19 +39,25 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore()
-    store.dispatch('systemStore/getPageListAction', {
-      pageName: props.pageName,
-      query: {
-        offset: 0,
-        size: 10
-      }
-    })
+    // 发送网络请求
+    const tableSearch = (params: any = {}) => {
+      store.dispatch('systemStore/getPageListAction', {
+        pageName: props.pageName,
+        query: {
+          offset: 0,
+          size: 10,
+          ...params
+        }
+      })
+    }
+    tableSearch()
     const dataList = computed(() => {
       return store.getters[`systemStore/pageListData`](props.pageName)
     })
     return {
       useIcon,
-      dataList
+      dataList,
+      tableSearch
     }
   }
 })

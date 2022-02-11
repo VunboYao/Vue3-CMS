@@ -8,7 +8,10 @@
         <el-button @click="handleRefresh"
           ><el-icon><Refresh /></el-icon>重置</el-button
         >
-        <el-button type="primary">查询</el-button>
+        <el-button type="primary" @click="handleSearch">
+          <el-icon><Search /></el-icon>
+          查询</el-button
+        >
       </div>
     </template>
   </v-from>
@@ -17,11 +20,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import vFrom from '@/base-ui/form'
-import { Refresh } from '@element-plus/icons-vue'
 export default defineComponent({
   name: 'PageSearch',
   components: {
-    Refresh,
     vFrom
   },
   props: {
@@ -30,7 +31,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  emits: ['handleSearch', 'handleRefresh'],
+  setup(props, { emit }) {
     // 双向绑定的属性应该是由配置文件的field来决定
     // 1.formData应该是动态的由formConfig中获取
     const formItems = props.formConfig.formItems ?? []
@@ -46,9 +48,16 @@ export default defineComponent({
         formData.value[`${key}`] = formOriginData[key]
       }*/
       formData.value = formOriginData
+      emit('handleRefresh')
+    }
+
+    // 3.搜索
+    const handleSearch = () => {
+      emit('handleSearch', formData.value)
     }
     return {
       handleRefresh,
+      handleSearch,
       formData
     }
   }
