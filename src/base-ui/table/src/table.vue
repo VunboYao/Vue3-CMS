@@ -1,5 +1,6 @@
 <template>
   <div class="table">
+    <!--表格头插槽-->
     <div class="header">
       <slot name="header">
         <div class="title">{{ title }}</div>
@@ -8,8 +9,12 @@
         </div>
       </slot>
     </div>
+
+    <!--表格列数据展示处理，插槽注册-->
     <el-table v-bind="$attrs" :data="listData" border>
+      <!--多选框-->
       <el-table-column v-if="showSelection" align="center" type="selection" />
+      <!--排序-->
       <el-table-column
         v-if="showIndex"
         type="index"
@@ -17,15 +22,19 @@
         align="center"
         label="序号"
       />
+      <!--插槽内容注入-->
       <template v-for="item in propsList" :key="item.prop">
         <el-table-column show-overflow-tooltip v-bind="item" align="center">
           <template #default="{ row }">
+            <!--默认插槽中，根据表格prop注入具名插槽。同时展示默认数据-->
             <slot :name="item.prop" :row="row">{{ row[item.prop] }}</slot>
           </template>
         </el-table-column>
       </template>
     </el-table>
-    <div class="footer">
+
+    <!--分页器：总是值大于0时展示-->
+    <div v-if="listCount" class="footer">
       <slot name="footer">
         <el-pagination
           v-model:currentPage="currentPage"

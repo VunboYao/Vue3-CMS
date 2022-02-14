@@ -7,6 +7,8 @@ export interface iSystemState {
   roleCount: number
   goodsList: any[]
   goodsCount: number
+  menuList: any[]
+  menuCount: number
 }
 
 export interface iVxSystemReq {
