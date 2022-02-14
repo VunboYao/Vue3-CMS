@@ -1,6 +1,5 @@
 <template>
   <div class="goods">
-    <h2>goods</h2>
     <page-table :table-config="tableConfig" page-name="goods">
       <template #status="{ row }">{{
         row.status === 1 ? '上架' : '下架'
@@ -10,6 +9,7 @@
           style="width: 60px; height: 60px"
           :src="row.imgUrl"
           :preview-src-list="[row.imgUrl]"
+          :append-to-body="true"
         ></el-image>
       </template>
       <template #oldPrice="{ row }">{{ '💰' + row.oldPrice }}</template>

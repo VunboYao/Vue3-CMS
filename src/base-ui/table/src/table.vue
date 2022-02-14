@@ -18,7 +18,7 @@
         label="序号"
       />
       <template v-for="item in propsList" :key="item.prop">
-        <el-table-column v-bind="item" align="center">
+        <el-table-column show-overflow-tooltip v-bind="item" align="center">
           <template #default="{ row }">
             <slot :name="item.prop" :row="row">{{ row[item.prop] }}</slot>
           </template>
