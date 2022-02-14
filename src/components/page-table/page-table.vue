@@ -6,7 +6,7 @@
     v-bind="tableConfig"
   >
     <template #headerHandler>
-      <el-button type="primary">新建用户</el-button>
+      <el-button v-if="isCreate" type="primary">新建用户</el-button>
     </template>
     <template #createAt="{ row }">
       {{ $filters.formatTime(row.createAt) }}
@@ -15,8 +15,12 @@
       {{ $filters.formatTime(row.updateAt) }}
     </template>
     <template #operation>
-      <el-button type="text" :icon="$icons[useIcon('Edit')]">编辑</el-button>
-      <el-button type="text" :icon="$icons[useIcon('Delete')]">删除</el-button>
+      <el-button v-if="isUpdate" type="text" :icon="$icons[useIcon('Edit')]"
+        >编辑</el-button
+      >
+      <el-button v-if="isDelete" type="text" :icon="$icons[useIcon('Delete')]"
+        >删除</el-button
+      >
     </template>
     <template
       v-for="item in otherPropSlots"
@@ -35,6 +39,7 @@ import { useIcon } from '@/utils/icon'
 import { useStore } from '@/store'
 import { Store } from 'vuex'
 import { iStoreType } from '@/store/type'
+import { usePermission } from '@/hooks/usePermission'
 
 export default defineComponent({
   name: 'PageTable',
@@ -53,6 +58,11 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore()
+    // 权限
+    const isCreate = usePermission(props.pageName, 'create')
+    const isUpdate = usePermission(props.pageName, 'update')
+    const isDelete = usePermission(props.pageName, 'delete')
+    const isQuery = usePermission(props.pageName, 'query')
     // 分页器配置
     const pageInfo = ref({
       pageSize: 10,
@@ -60,6 +70,7 @@ export default defineComponent({
     })
     // 发送网络请求
     const tableSearch = (params: any = {}) => {
+      if (!isQuery) return
       store.dispatch('systemStore/getPageListAction', {
         pageName: props.pageName,
         query: {
@@ -84,7 +95,10 @@ export default defineComponent({
       pageInfo,
       useIcon,
       tableSearch,
-      otherPropSlots
+      otherPropSlots,
+      isCreate,
+      isUpdate,
+      isDelete
     }
   }
 })

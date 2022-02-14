@@ -8,7 +8,7 @@ import {
 } from '@/service/login/login'
 import Cache from '@/utils/cache'
 import router from '@/router'
-import { mapMenusToRoutes } from '@/utils/mapMenus'
+import { mapMenusToRoutes, mapMenuToPermission } from '@/utils/mapMenus'
 
 const loginStore: Module<iLoginState, any> = {
   namespaced: true, // 模块下需要声明namespaced
@@ -16,7 +16,8 @@ const loginStore: Module<iLoginState, any> = {
     return {
       token: '',
       userInfo: null,
-      userMenu: null
+      userMenu: null,
+      permissions: []
     }
   },
   mutations: {
@@ -35,10 +36,8 @@ const loginStore: Module<iLoginState, any> = {
     },
     SAVE_USER_MENU(state, userMenu: any) {
       state.userMenu = userMenu
-      const route = mapMenusToRoutes(userMenu)
-      route.forEach((route) => {
-        router.addRoute('Main', route)
-      })
+      // 菜单处理
+      handleMenuAndPermission(state, userMenu)
     },
     LOGIN_LOCAL_DATA(state) {
       const userInfo = Cache.getCache('userInfo')
@@ -50,12 +49,10 @@ const loginStore: Module<iLoginState, any> = {
         state.token = token
       }
       const userMenu = Cache.getCache('userMenu')
+      // 菜单映射
       if (userMenu) {
         state.userMenu = userMenu
-        const route = mapMenusToRoutes(userMenu)
-        route.forEach((route) => {
-          router.addRoute('Main', route)
-        })
+        handleMenuAndPermission(state, userMenu)
       }
     }
   },
@@ -83,6 +80,15 @@ const loginStore: Module<iLoginState, any> = {
       await router.push('/main')
     }
   }
+}
+
+function handleMenuAndPermission(state: iLoginState, userMenu: any[]) {
+  const route = mapMenusToRoutes(userMenu)
+  route.forEach((route) => {
+    router.addRoute('Main', route)
+  })
+  // 权限存储
+  state.permissions = mapMenuToPermission(userMenu)
 }
 
 export default loginStore
