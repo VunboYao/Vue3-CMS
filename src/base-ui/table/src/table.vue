@@ -30,7 +30,7 @@
         <el-pagination
           v-model:currentPage="currentPage"
           v-model:page-size="pageSize"
-          :page-sizes="[2, 4, 6]"
+          :page-sizes="[10, 20, 30]"
           layout="total, sizes, prev, pager, next, jumper"
           :total="listCount"
           @size-change="onSizeChange"
@@ -52,7 +52,7 @@ export default defineComponent({
       type: Object,
       default: () => ({
         currentPage: 1,
-        pageSize: 2
+        pageSize: 10
       })
     },
     title: {

@@ -9,7 +9,11 @@
       ref="pageTableRef"
       :table-config="tableConfig"
       page-name="users"
-    />
+    >
+      <template #enable="{ row }">
+        {{ row.enable === 1 ? '启用' : '禁用' }}
+      </template>
+    </page-table>
   </div>
 </template>
 

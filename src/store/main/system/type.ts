@@ -5,6 +5,8 @@ export interface iSystemState {
   usersCount: number
   roleList: any[]
   roleCount: number
+  goodsList: any[]
+  goodsCount: number
 }
 
 export interface iVxSystemReq {

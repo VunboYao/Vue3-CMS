@@ -8,7 +8,6 @@
     <template #headerHandler>
       <el-button type="primary">新建用户</el-button>
     </template>
-    <template #enable="{ row }">{{ row.enable ? '启用' : '禁用' }}</template>
     <template #createAt="{ row }">
       {{ $filters.formatTime(row.createAt) }}
     </template>
@@ -18,6 +17,13 @@
     <template #operation>
       <el-button type="text" :icon="$icons[useIcon('Edit')]">编辑</el-button>
       <el-button type="text" :icon="$icons[useIcon('Delete')]">删除</el-button>
+    </template>
+    <template
+      v-for="item in otherPropSlots"
+      :key="item.prop"
+      #[item.prop]="{ row }"
+    >
+      <slot v-if="item.slotName" :name="item.slotName" :row="row"></slot>
     </template>
   </v-table>
 </template>
@@ -49,7 +55,7 @@ export default defineComponent({
     const store = useStore()
     // 分页器配置
     const pageInfo = ref({
-      pageSize: 2,
+      pageSize: 10,
       currentPage: 1
     })
     // 发送网络请求
@@ -68,11 +74,17 @@ export default defineComponent({
       tableSearch()
     })
 
+    const otherPropSlots = props.tableConfig.propsList.filter((item: any) => {
+      if (item.prop === 'createAt') return false
+      if (item.prop === 'operation') return false
+      return item.prop !== 'updateAt'
+    })
     return {
       ...getTableData(store, props), // 页面数据，数量获取
       pageInfo,
       useIcon,
-      tableSearch
+      tableSearch,
+      otherPropSlots
     }
   }
 })

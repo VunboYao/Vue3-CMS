@@ -10,7 +10,9 @@ const systemStore: Module<iSystemState, iRootState> = {
       usersList: [],
       usersCount: 0,
       roleList: [],
-      roleCount: 0
+      roleCount: 0,
+      goodsList: [],
+      goodsCount: 0
     }
   },
   getters: {
@@ -43,6 +45,12 @@ const systemStore: Module<iSystemState, iRootState> = {
     },
     CHANGE_ROLE_COUNT(state, roleCount) {
       state.roleCount = roleCount
+    },
+    CHANGE_GOODS_LIST(state, goodsList: any[]) {
+      state.goodsList = goodsList
+    },
+    CHANGE_GOODS_COUNT(state, goodsCount) {
+      state.goodsCount = goodsCount
     }
   },
   actions: {
