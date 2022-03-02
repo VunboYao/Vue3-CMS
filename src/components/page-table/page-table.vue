@@ -22,6 +22,7 @@
         >删除</el-button
       >
     </template>
+    <!-- 动态组件注册 -->
     <template
       v-for="item in otherPropSlots"
       :key="item.prop"
