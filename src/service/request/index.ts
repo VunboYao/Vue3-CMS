@@ -62,7 +62,8 @@ export default class {
   }
 
   request<T>(config: VunRequestConfig<T>): Promise<T> {
-    return new Promise((resolve, reject) => {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (resolve, reject) => {
       // todo: 默认开启loading
       config.showLoading = config.showLoading ?? true
       // loading的触发点
@@ -81,7 +82,7 @@ export default class {
       }
       // 单次请求的独立加工？？？
       if (config.interceptor?.requestInterceptor) {
-        config = config.interceptor.requestInterceptor(config)
+        config = await config.interceptor.requestInterceptor(config)
       }
       // 实例方法：request
       this.instance
